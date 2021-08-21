@@ -54,7 +54,7 @@ public class AdjMatrix_bfs3 {
 		Queue<int[]> queue = new LinkedList<int[]>(); // 탐색할 노드를 담을 큐 
 		//1.  첫 방문한 node 를 queue에 담기 
 		queue.offer(new int[] {sr,sc});
-		//2. queue에 담은node를 방문 처리  큐에 넣을때 방문처리를 해야함 
+		//2. queue에 담은node를 방문 처리  큐에 넣을때 방문처리를 해야함  // 들어갈떄 방문처리
 		visited[sr][sc] = true;
 		
 		//3. 탐색 시작 
