@@ -22,7 +22,6 @@ public class 백준_11399_ATM {
         Arrays.sort(arr);
 
         for(int i = 0; i < arr.length; i++) {
-
             for(int j = 0; j <= i; j++) {
                 sum = sum + arr[j];
             }
