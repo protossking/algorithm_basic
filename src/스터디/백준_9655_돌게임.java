@@ -15,6 +15,15 @@ public class 백준_9655_돌게임 {
         }else {
             System.out.println("CK");
         }
+        /*
+              1  sk
+              2 ck
+              3 sk
+              4 ck
+              5 sk
+              6 ck
+              ...
+         */
     }
 
 }

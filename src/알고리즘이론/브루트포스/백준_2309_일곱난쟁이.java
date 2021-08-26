@@ -24,7 +24,7 @@ public class 백준_2309_일곱난쟁이 {
 
 
     }
-
+    //백트래킹
     static void combi(int start,int cnt, int n, int r) {
         if( r== 0) {
 
@@ -39,8 +39,19 @@ public class 백준_2309_일곱난쟁이 {
             visited[i] = false;
         }
 
-
-
+    }
+    //재귀 사용
+    static void com(int[] arr, boolean[] visited, int depth, int n, int r) {
+        if(r ==0) {
+            return;
+        }
+        if(depth == n) {
+            return;
+        }
+        visited[depth] = true;
+        com(arr, visited, depth +1 , n, r-1);
+        visited[depth] = false;
+        com(arr, visited, depth+1, n, r);
     }
 
 

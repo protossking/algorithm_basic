@@ -1,4 +1,4 @@
-package 스터디;
+package 스터디.d0824;
 
 import java.io.BufferedReader;
 import java.io.IOException;
