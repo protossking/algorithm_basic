@@ -1,61 +1,105 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class Main {
-
-
+    static int[] arr;
+    static int[] nums;
+    static boolean tag;
     public static void main(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        arr = new int[9];
+        nums = new int[7];
+        tag = false;
+        for(int i = 0; i < 9; i++) {
+            arr[i] = Integer.parseInt(in.readLine());
 
-        StringBuilder sb = new StringBuilder();
-        String[] name = {"black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "grey", "white"};
-        String first = in.readLine();
-        String middle = in.readLine();
-        String last = in.readLine();
-
-        for(int i = 0; i < name.length; i++) {
-            if(first.equals(name[0])) {
-                break;
-            }
-            if(first.equals(name[i])) {
-                sb.append(i);
-            }
         }
-        for(int i = 0; i < name.length; i++) {
-            if(middle.equals(name[i])) {
-                sb.append(i);
-            }
-        }
-        for(int i = 1; i <name.length; i++) {
-            if(last.equals(name[0])) {
-                break;
-            }
-            if(last.equals(name[i])) {
-                if(middle.equals(name[0]) && first.equals(name[0])) {
-
-                    sb = new StringBuilder();
-                    sb.append(0);
-                    break;
-                }
-                for(int j = 0; j < i; j++) {
-                    sb.append("0");
-                }
+        combi(0,0,0);
 
 
-
-
-            }
-        }
-
-
-        System.out.println(sb);
 
     }
+    static void combi(int cnt, int start, int sum) {
+        if(cnt == 7) {
+            if(sum == 100) {
+                tag = true;
+                Arrays.sort(nums);
+                for(int num: nums) {
+                    System.out.println(num);import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Scanner;
 
+                    public class Main {
+                        static int[] arr;
+                        static int[] nums;
+                        static boolean tag;
+                        public static void main(String[] args) throws IOException {
+                            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+                            arr = new int[9];
+                            nums = new int[7];
+                            tag = false;
+                            for(int i = 0; i < 9; i++) {
+                                arr[i] = Integer.parseInt(in.readLine());
+
+                            }
+                            combi(0,0,0);
+
+
+
+                        }
+                        static void combi(int cnt, int start, int sum) {
+                            if(cnt == 7) {
+                                if(sum == 100) {
+                                    tag = true;
+                                    Arrays.sort(nums);
+                                    for(int num: nums) {
+                                        System.out.println(num);
+                                    }
+
+
+                                }
+                                return;
+                            }
+                            if(sum > 100) {
+                                return;
+                            }
+
+                            for(int i = start; i < arr.length; i++) {
+                                if(tag == true) {
+                                    return;
+                                }
+                                nums[cnt] = arr[i];
+                                combi(cnt + 1, i+1, sum + nums[cnt]);
+                                combi(cnt, i+1, sum);
+
+                            }
+                        }
+
+                    }
+                }
+
+
+            }
+            return;
+        }
+        if(sum > 100) {
+            return;
+        }
+
+        for(int i = start; i < arr.length; i++) {
+            if(tag == true) {
+                return;
+            }
+            nums[cnt] = arr[i];
+            combi(cnt + 1, i+1, sum + nums[cnt]);
+            combi(cnt, i+1, sum);
+
+        }
+    }
 
 }
