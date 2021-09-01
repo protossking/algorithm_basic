@@ -22,43 +22,50 @@ public class 백준_2309_일곱난쟁이2 {
         for(int i = 0; i < arr.length; i++) {
             arr[i] = Integer.parseInt(in.readLine());
         }
-        combi(0,0,0);
+
         Arrays.toString(numbers);
+        combi2(9,7,0,0,0);
 
 
     }
 
 
     static void combi(int start,int cnt, int sum) {
-        if(cnt == 7) {
-            if(sum == 100) {
+        if (cnt == 7) {
+            if (sum == 100) {
                 System.out.println(Arrays.toString(numbers));
                 tag = true;
             }
-
         }
-
-
-        for(int i = start; i < arr.length; i++) {
-
+        for (int i = start; i < arr.length; i++) {
             numbers[cnt] = arr[i];
-            combi(i+1, cnt+1, sum + numbers[cnt]);
-            combi(i+1, cnt, sum);
-
-            if(tag == true) {
+            combi(i + 1, cnt + 1, sum + numbers[cnt]);
+            combi(i + 1, cnt, sum);
+            if (tag == true) {
                 return;
             }
 
-//            visited[i] = true;
-//            numbers[cnt] = arr[i];
-//            combi(i+1, cnt + 1, sum + numbers[cnt]);
-//            visited[i] = false;
-
         }
+    }
+        static void combi2(int n,int r, int sum, int cnt, int start) {
+            if(r == 0) {
+                System.out.println(Arrays.toString(numbers));
+                return;
+
+            }
+            if(cnt == 7) {
+                return;
+            }
+                numbers[cnt] = arr[start];
+                combi2(n-1, r-1,sum+numbers[cnt], cnt+1, start+1);
+                combi2(n, r, cnt+1,sum,start+1);
+
+            }
+
 
     }
 
 
 
 
-}
+
