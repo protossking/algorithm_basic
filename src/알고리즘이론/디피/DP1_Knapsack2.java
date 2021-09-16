@@ -14,7 +14,7 @@ import java.util.Scanner;
     0-1 냅색
 
  */
-public class 생일선물 {
+public class DP1_Knapsack2 {
 
     public static void main(String[] args) {
         Scanner sc =  new Scanner(System.in);
@@ -28,20 +28,17 @@ public class 생일선물 {
             weights[i] = sc.nextInt();
             profits[i] = sc.nextInt();
         }
-        int[][] d = new int[N+1][W+1];
+        int[] d = new int[W+1];
 
         for(int i = 1; i <= N; i++) {
-            for(int w = 0; w <= W; w++) {
-                if(weights[i] <= w) { // 해당 물건을 가방에 넣을수 있다.
-                    d[i][w] = Math.max(d[i-1][w], profits[i] + d[i-1][w-weights[i]]);
+            for(int w = W; w >= weights[i]; w--) {
 
-                } else { // 해당물건을 가방에 넣을 수 없다.
-                    d[i][w] = d[i-1][w];
+                    d[w] = Math.max(d[w], profits[i] + d[w-weights[i]]);
 
-                }
+
             }
         }
-        System.out.println(d[N][W]);
+        System.out.println(d[W]);
     }
 
 }
