@@ -30,15 +30,15 @@ public class 백준_9205_맥주마시면서걸어가기 {
                     int[] p2 = point.get(j);
                     dist[i][j] = Math.abs(p1[0] - p2[0]) + Math.abs(p1[1] - p2[1]);
 
-                    if(dist[i][j] <= 50 * 20)
+                    if(dist[i][j] <= 50 * 20) //최대20개 50미터마다 1병씩
                         d[i][j] = true;
                 }
 
             }
 
-            for(int k = 0; k < n+2; k++) {
-                for(int i = 0; i < n+2; i++) {
-                    for(int j = 0; j < n+2; j++) {
+            for(int k = 0; k < n+2; k++) { //경
+                for(int i = 0; i < n+2; i++) { // 출
+                    for(int j = 0; j < n+2; j++) { // 도
                         if(d[i][k] & d[k][j])
                             d[i][j] = true;
                     }
