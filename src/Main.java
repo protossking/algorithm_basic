@@ -8,26 +8,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-
-
-        char[][] c = new char[5][15];
-        for (int i = 0; i < c.length; i++) {
-            String s = in.readLine();
-            for (int j = 0; j < s.length(); j++) {
-                c[i][j] = s.charAt(j);
-            }
+        int N = Integer.parseInt(in.readLine());
+        int E = Integer.parseInt(in.readLine());
+        int[][] map = new int[E][E];
+        for(int i = 0 ; i < E; i++) {
+            StringTokenizer st = new StringTokenizer(in.readLine());
         }
-
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 5; j++) {
-                if (c[j][i] == ' ' || c[j][i] == '\0') {
-                    continue;
-                }
-                sb.append(c[j][i]);
-            }
-        }
-        System.out.println(sb);
     }
 
 
