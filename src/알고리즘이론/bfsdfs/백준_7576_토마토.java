@@ -19,7 +19,7 @@ public class 백준_7576_토마토 {
     static Queue<int[]> queue = new LinkedList<>();
 
 
-    static int cnt;
+
 
 
     public static void main(String[] args) throws IOException {
@@ -33,7 +33,7 @@ public class 백준_7576_토마토 {
         map = new int[N][M];
 
 
-        // 모두가 1이거나 -1 일떄
+
 
 
         for (int i = 0; i < N; i++) {
@@ -57,7 +57,7 @@ public class 백준_7576_토마토 {
     }
 
     static int bfs() {
-        cnt = 0;
+
         while(!queue.isEmpty()) {
 
             int[] cur = queue.poll();
@@ -95,16 +95,7 @@ public class 백준_7576_토마토 {
 
 
     }
-    static boolean check() {
-        for(int i = 0; i < N; i++) {
-            for(int j = 0; j < M; j++) {
-                if(map[i][j] == 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+
 
 
 
