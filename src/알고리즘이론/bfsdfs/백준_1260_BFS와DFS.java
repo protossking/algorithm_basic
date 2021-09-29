@@ -19,6 +19,8 @@ public class 백준_1260_BFS와DFS {
     public static void main(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(in.readLine());
+
+
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         V = Integer.parseInt(st.nextToken());

@@ -31,7 +31,7 @@ public class 백준_1753_최단거리_PQ {
 
             list[r].add(new Node(c,w));
         }
-//        System.out.println(Arrays.deepToString(map));
+//        System.out.println(Arrays.deepToString(map));zx
 
         Arrays.fill(distance, Integer.MAX_VALUE);
         distance[start] = 0;

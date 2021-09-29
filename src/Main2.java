@@ -8,103 +8,142 @@ import java.util.StringTokenizer;
 
 public class Main2 {
 
+    static int n;
+    static int m;
     static int[][] map;
-    static int[] dr = {-1, 1, 0, 0, -1, 1, -1, 1};
-    static int[] dc = {0, 0, -1, 1, -1, -1, 1, 1};
-    static int N;
-    static int M;
-    static int black;
-    static int white;
+    static int d;
+    static int[][] delta = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}}; //북 서 남 동
 
     public static void main(String[] args) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        int T = Integer.parseInt(in.readLine());
+        StringTokenizer st = new StringTokenizer(in.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
-        for (int tc = 1; tc <= T; tc++) {
-            StringTokenizer st = new StringTokenizer(in.readLine());
+        map = new int[n][m];
 
-            N = Integer.parseInt(st.nextToken()); // n 은 판크기
-            M = Integer.parseInt(st.nextToken());
-            map = new int[N][N];
-            black = 0;
-            white = 0;
+        st = new StringTokenizer(in.readLine());
 
-            if (N == 4) {
-                map[1][1] = 2;
-                map[1][1] = 2;
-                map[1][2] = 1;
-                map[2][1] = 1;
+        int r = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
+        d = Integer.parseInt(st.nextToken());
+
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(in.readLine());
+            for (int j = 0; j < m; j++) {
+                map[i][j] = Integer.parseInt(st.nextToken());
             }
-            if (N == 6) {
-                map[2][2] = 2;
-                map[3][3] = 2;
-                map[2][3] = 1;
-                map[3][2] = 1;
-            }
-            if (N == 8) {
-                map[3][3] = 2;
-                map[4][4] = 2;
-                map[3][4] = 1;
-                map[4][3] = 1;
-            }
+        }
+        int k = d;
+//        k = k + 1;
+        while (true) {
+            // 청소
+            map[r][c] = 2;
 
-            for (int i = 0; i < M; i++) {
-                st = new StringTokenizer(in.readLine());
-                int c = Integer.parseInt(st.nextToken()) - 1;
-                int r = Integer.parseInt(st.nextToken()) - 1;
-                map[r][c] = Integer.parseInt(st.nextToken());
+            // 방향입력받아 돌리기
 
-                for (int j = 0; j < 8; j++) {
-                    int nc = c + dc[j];
-                    int nr = r + dr[j];
+            int nr = r + delta[k % 3][0];
+            int nc = c + delta[k % 3][1];
 
-                    while (true) {
-                        if (!isIn(nr, nc) && map[nr][nc] == 0) {
-                            break;
-                        }
-                        if (map[nr][nc] != map[r][nc]) {
-                            nr += dr[j];
-                            nc += dc[j];
+            if (isIn(nr, nc)) {
+
+                if (map[nr][nc] == 0) {
+                    r = nr;
+                    c = nc;
+                    map[nr][nc] = 2;
+                    continue;
+
+
+                }
+                else if(map[nr][nc] == 1 || map[nr][nc] == 2) {
+                    boolean flag = false;
+
+                    for(int i =0 ; i < 4; i++) {
+                        int a = r + delta[i][0];
+                        int b = c + delta[i][1];
+
+                        if(map[a][b] != 0) {
+                            flag = true;
                         } else {
+                            flag = false;
                             break;
                         }
                     }
-                    if (isIn(nr, nc) && map[nr][nc] == map[r][c]) {
-                        while (nr != r || nc != c) {
-                            map[nr][nc] = map[r][c];
-                            nr -= dr[j];
-                            nc -= dc[j];
+
+                    if(flag) {
+                        int a = r - delta[k%3][0];
+                        int b = c - delta[k%3][1];
+                        if(map[a][b] == 1) {
+                            break;
+                        } else {
+                            r = a;
+                            c = b;
+                            continue;
                         }
+                    } else {
+                        k ++;
+                        continue;
                     }
-
-
                 }
 
             }
 
 
 
+
+
+
         }
 
-        for(int i = 0; i < N; i++) {
-            for(int j = 0; j < N; j++) {
-                if(map[i][j] == 1) {
-                    black++;
-                }
-                if(map[i][j] == 2) {
-                    white++;
+        int cnt = 0;
+        for (
+                int i = 0;
+                i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (map[i][j] == 2) {
+                    cnt++;
                 }
             }
         }
-
+        System.out.println(cnt);
     }
-
-
 
     static boolean isIn(int r, int c) {
-        if (r > -1 && c > -1 && r < N && c < N) {
-            return true;
+        if (r < 0 || c < 0 || r >= n || c >= m) {
+            return false;
         }
-        return false;
+        return true;
     }
+
+    static boolean all(int r, int c) {
+        if (map[r - 1][c] == 0 || map[r][c - 1] == 0 || map[r + 1][c] == 0 || map[r][c + 1] == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    static int rotate(int dir) {
+
+        // 북쪽이면 서쪽으로
+        if (dir == 0) {
+            return 2;
+        }
+
+        // 서쪽이면 남쪽으로
+        else if (dir == 1) {
+            return 1;
+        }
+
+        // 남쪽이면 동쪽으로
+        else if (dir == 2) {
+            return 3;
+        }
+        // 동쪽이면 북쪽으로
+        else {
+            return 0;
+        }
+    }
+
 }

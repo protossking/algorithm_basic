@@ -5,42 +5,56 @@ import java.util.*;
 
 public class Main {
 
+    static int N;
+    static int[][] map;
+    static boolean[][] visited;
+    static int cnt;
+
+    static int[] dr = {-1, 1, 0, 0};
+    static int[] dc = {0, 0, -1, 1};
+
     public static void main(String[] args) throws IOException {
 
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(in.readLine());
-        int E = Integer.parseInt(in.readLine());
+      BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+      N = Integer.parseInt(in.readLine());
+      map = new int[N][N];
+      visited = new boolean[N][N];
 
-        int[][] map = new int[N][N];
-        boolean[] visited = new boolean[N];
-        for(int i = 0 ; i < E; i++) {
-            StringTokenizer st = new StringTokenizer(in.readLine());
-            int n1 = Integer.parseInt(st.nextToken())-1;
-            int n2 = Integer.parseInt(st.nextToken())-1;
-            map[n1][n2] = 1;
-            map[n2][n1] = 1;
+      for(int i = 0; i < N; i++) {
+          String s = in.readLine();
+          for(int j = 0; j < N; j++) {
+              map[i][j] = s.charAt(j) - '0';
+          }
+      }
+      ArrayList<Integer> list = new ArrayList<>();
+
+      for(int i = 0; i < N; i++) {
+          for(int j = 0; j < N; j++) {
+              if(!visited[i][j] && map[i][j] == 1) {
+                  cnt = 0;
+                  dfs(i, j);
+                  list.add(cnt);
+              }
+          }
+      }
+        System.out.println(list);
+
+    }
+
+    static void dfs(int r, int c) {
+        visited[r][c] = true;
+        cnt ++;
+        for(int adj = 0; adj < 4; adj ++) {
+            int nr = r + dr[adj];
+            int nc = c + dc[adj];
+
+            if(nr < 0 || nc < 0  || nr >= N || nc>= N) continue;
+            if(visited[nr][nc]) continue;
+            if(map[nr][nc] == 0) continue;
+
+            dfs(nr, nc);
+
         }
-        int cnt = 0;
-
-
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(map[0][0]);
-        visited[0] = true;
-
-        while (!queue.isEmpty()) {
-            int cur = queue.poll();
-
-            for(int adj = 0 ; adj < N; adj ++) {
-                if(!visited[adj] && map[cur][adj] == 1) {
-                    queue.offer(adj);
-                    visited[adj] = true;
-                    cnt ++;
-                }
-            }
-        }
-        System.out.println(cnt);
-
-
 
     }
 
